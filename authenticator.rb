@@ -9,6 +9,20 @@ users = [
 p "Welcome to the authenticator"
 30.times { print "-"}
 
+def auth_user(user_name, password, users)
+    user = users.select { | user | user[:username] == user_name}.first
+
+    if user == nil
+        return "There is no user"
+    else
+        if user[:password] == password
+            return "Great, your password is correct!!!"
+        else
+            return "Sorry, please try a gain"
+        end
+    end    
+end
+
 while true
     p " "
     p "This program will take input from the user and compare password"
@@ -20,17 +34,7 @@ while true
 
     p "Your username is #{user_name} and password is #{password}"
 
-    user = users.select { | user | user[:username] == user_name}.first
-
-    if user == nil
-        p "there is no user"
-    else
-        if user[:password] == password
-            p "Great, your password is correct!!!"
-        else
-            p "Sorry, please try a gain"
-        end
-    end    
+    p auth_user(user_name, password, users)
 
     p "Press q to quit or anykey to continue"
     input = gets.chomp.downcase
